@@ -17,7 +17,7 @@ namespace Vulcan.NET
         private const int VendorId = 0x1E7D;
         private const uint LedUsagePage = 0x0001;
         private const uint LedUsage = 0x0000;
-        private static readonly int[] ProductIds = new int[] { 0x307A, 0x3098 };
+        private static readonly int[] ProductIds = new int[] { 0x2fee }; //need tkl pro id
         private static readonly byte[] ColorPacketHeader = new byte[5] { 0x00, 0xa1, 0x01, 0x01, 0xb4 };
 
         private readonly HidDevice _ledDevice;
@@ -175,11 +175,11 @@ namespace Vulcan.NET
         {
             var result =
                 GetCtrlReport(0x0f) &&
+                SetCtrlReport(CtrlReports._0x04) &&
+                WaitCtrlDevice() &&
                 SetCtrlReport(CtrlReports._0x15) &&
                 WaitCtrlDevice() &&
                 SetCtrlReport(CtrlReports._0x05) &&
-                WaitCtrlDevice() &&
-                SetCtrlReport(CtrlReports._0x07) &&
                 WaitCtrlDevice() &&
                 SetCtrlReport(CtrlReports._0x0a) &&
                 WaitCtrlDevice() &&
